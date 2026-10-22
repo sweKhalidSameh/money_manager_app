@@ -13,6 +13,7 @@ class AppTextFormField extends StatelessWidget {
   final Widget? suffixIcon;
   final Color? backgroudColor;
   final TextEditingController? controller;
+  final String? Function(String?)? validator;
 
   const AppTextFormField({
     super.key,
@@ -26,25 +27,32 @@ class AppTextFormField extends StatelessWidget {
     this.focusedBorder,
     this.backgroudColor,
     this.controller,
+    this.validator,
   });
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
       controller: controller,
+      validator: validator,
       decoration: InputDecoration(
         isDense: true,
-        contentPadding:
-            contentPadding ??
+        errorBorder: OutlineInputBorder(
+          borderSide: BorderSide(color: AppColors.error, width: 1),
+          borderRadius: BorderRadius.circular(16),
+        ),
+        focusedErrorBorder: OutlineInputBorder(
+          borderSide: BorderSide(color: AppColors.error, width: 1),
+          borderRadius: BorderRadius.circular(16),
+        ),
+        contentPadding: contentPadding ??
             EdgeInsetsDirectional.symmetric(horizontal: 12, vertical: 16),
-        focusedBorder:
-            focusedBorder ??
+        focusedBorder: focusedBorder ??
             OutlineInputBorder(
               borderSide: BorderSide(color: AppColors.secondaryColor, width: 1),
               borderRadius: BorderRadius.circular(16),
             ),
-        enabledBorder:
-            enabledBorder ??
+        enabledBorder: enabledBorder ??
             OutlineInputBorder(
               borderSide: BorderSide(color: AppColors.primaryColor, width: 1),
               borderRadius: BorderRadius.circular(16),
