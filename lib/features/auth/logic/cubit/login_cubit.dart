@@ -1,5 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:meta/meta.dart';
+import 'package:money_manager/core/helper/map_error.dart';
 import 'package:money_manager/features/auth/logic/data/auth_repository.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
@@ -18,30 +19,11 @@ class LoginCubit extends Cubit<LoginState> {
       emit(LoginSuccess());
     } on FirebaseAuthException catch (e) {
       if (isClosed) return;
-      emit(LoginFailure(errorMessage: _mapError(e.code)));
+      emit(LoginFailure(errorMessage: mapError(e.code)));
     } catch (_) {
       if (isClosed) return;
       emit(LoginFailure(
           errorMessage: 'Something went wrong. Please try again.'));
-    }
-  }
-
-  String _mapError(String code) {
-    switch (code) {
-      case 'invalid-email':
-        return 'The email address is not valid.';
-      case 'user-disabled':
-        return 'This account has been disabled.';
-      case 'user-not-found':
-      case 'wrong-password':
-      case 'invalid-credential':
-        return 'Incorrect email or password.';
-      case 'too-many-requests':
-        return 'Too many attempts. Try again later.';
-      case 'network-request-failed':
-        return 'No internet connection.';
-      default:
-        return 'Login failed. Please try again.';
     }
   }
 }

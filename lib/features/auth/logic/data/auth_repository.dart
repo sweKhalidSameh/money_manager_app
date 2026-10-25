@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/rendering.dart';
 
 class AuthRepository {
   final FirebaseAuth _firebaseAuth;
@@ -39,8 +40,12 @@ class AuthRepository {
         'lastName': lastName,
         'phone': phone,
       });
-    } catch (e) {
-      await userCredential.user!.delete();
+    } catch (_) {
+      try {
+        await userCredential.user!.delete();
+      } catch (e) {
+        debugPrint('Failed to delete user after Firestore write failure: $e');
+      }
       rethrow;
     }
   }
