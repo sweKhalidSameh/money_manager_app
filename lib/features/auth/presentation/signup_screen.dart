@@ -168,7 +168,6 @@ class _SignupScreenState extends State<SignupScreen> {
                               controller: _passwordController,
                             ),
                             const SizedBox(height: 8),
-
                             _buildLabel('Confirm Password'),
 
                             PasswordField(
@@ -186,6 +185,13 @@ class _SignupScreenState extends State<SignupScreen> {
                             PasswordStrengthBar(
                                 controller: _passwordController),
 
+                            const SizedBox(height: 8),
+                            Text(
+                              'At least 8 characters \nWith an uppercase letter \nA lowercase letter\nA number\nAnd a special character.',
+                              style: AppTextStyles.captionText.copyWith(
+                                color: AppColors.textSecondary,
+                              ),
+                            ),
                             const SizedBox(height: 20),
 
                             // Create Account Button
