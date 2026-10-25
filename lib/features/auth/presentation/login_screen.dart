@@ -4,6 +4,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:money_manager/core/theme/app_text_styles.dart';
 import 'package:money_manager/core/theme/app_colors.dart';
 import 'package:money_manager/core/utils/email_validator.dart';
+import 'package:money_manager/core/utils/password_validator.dart';
 import 'package:money_manager/core/widgets/text_form_field.dart';
 import 'package:money_manager/features/auth/logic/cubit/login_cubit.dart';
 import 'package:money_manager/features/auth/logic/data/auth_repository.dart';
@@ -113,6 +114,8 @@ class _LoginScreenState extends State<LoginScreen> {
                                     ),
                                     // password field
                                     PasswordField(
+                                      validator:
+                                          PasswordValidator.loginValidator,
                                       controller: _passwordController,
                                     ),
                                     const SizedBox(height: 10),

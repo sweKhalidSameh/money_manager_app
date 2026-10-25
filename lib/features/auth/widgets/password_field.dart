@@ -19,7 +19,7 @@ class _PasswordFieldState extends State<PasswordField> {
   Widget build(BuildContext context) {
     return AppTextFormField(
       controller: widget.controller,
-      validator: widget.validator ?? PasswordValidator.validate,
+      validator: widget.validator ?? PasswordValidator.signUpValidater,
       hintText: '********',
       hintStyle: AppTextStyles.balanceLabel.copyWith(
         color: AppColors.textSecondary,

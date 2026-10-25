@@ -17,7 +17,7 @@ class PasswordValidator {
     return PasswordStrength.strong;
   }
 
-  static String? validate(String? value) {
+  static String? signUpValidater(String? value) {
     if (value == null || value.isEmpty) {
       return 'Password is required.';
     } else if (value.length < 8) {
@@ -30,6 +30,13 @@ class PasswordValidator {
       return 'Password must contain at least one digit.';
     } else if (!RegExp(r'[!@#$%^&*(),.?":{}|<>]').hasMatch(value)) {
       return 'Password must contain at least one special character.';
+    }
+    return null;
+  }
+
+  static String? loginValidator(String? value) {
+    if (value == null || value.isEmpty) {
+      return 'Password is required.';
     }
     return null;
   }
