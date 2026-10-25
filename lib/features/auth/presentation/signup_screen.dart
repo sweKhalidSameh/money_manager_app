@@ -322,7 +322,7 @@ class _SignupScreenState extends State<SignupScreen> {
       width: double.infinity,
       child: ElevatedButton(
         onPressed: () {
-          // TODO: Google Sign Up
+          context.read<SignUpCubit>().signUpWithGoogle();
         },
         style: ElevatedButton.styleFrom(
           backgroundColor: AppColors.cardBackground,

@@ -225,7 +225,7 @@ class _LoginScreenState extends State<LoginScreen> {
                               SizedBox(height: 10),
                               ElevatedButton(
                                 onPressed: () {
-                                  // TODO: implement Google Sign In
+                                  context.read<LoginCubit>().loginWithGoogle();
                                 },
                                 style: ElevatedButton.styleFrom(
                                   backgroundColor: AppColors.cardBackground,

@@ -40,4 +40,25 @@ class SignUpCubit extends Cubit<SignUpState> {
           errorMessage: 'Something went wrong. Please try again.'));
     }
   }
+
+  Future<void> signUpWithGoogle() async {
+    emit(SignUpLoading());
+    try {
+      bool success = await authRepository.signInWithGoogle();
+      if (success) {
+        if (isClosed) return;
+        emit(SignUpSuccess());
+      } else {
+        if (isClosed) return;
+        emit(SignUpInitial());
+      }
+    } on FirebaseAuthException catch (e) {
+      if (isClosed) return;
+      emit(SignUpFailure(errorMessage: mapError(e.code)));
+    } catch (_) {
+      if (isClosed) return;
+      emit(SignUpFailure(
+          errorMessage: 'Something went wrong. Please try again.'));
+    }
+  }
 }
