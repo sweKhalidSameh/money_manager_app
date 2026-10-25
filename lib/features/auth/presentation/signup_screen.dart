@@ -164,7 +164,7 @@ class _SignupScreenState extends State<SignupScreen> {
                             _buildLabel('Password'),
 
                             PasswordField(
-                              validator: PasswordValidator.signUpValidater,
+                              validator: PasswordValidator.signUpValidator,
                               controller: _passwordController,
                             ),
                             const SizedBox(height: 8),
@@ -271,7 +271,6 @@ class _SignupScreenState extends State<SignupScreen> {
               email: _emailController.text,
               phone: _phoneController.text,
               password: _passwordController.text,
-              confirmPassword: _confirmPasswordController.text,
             );
           }
         },

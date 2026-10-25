@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:money_manager/core/theme/app_colors.dart';
 import 'package:money_manager/core/theme/app_text_styles.dart';
-import 'package:money_manager/core/utils/password_validator.dart';
 import 'package:money_manager/core/widgets/text_form_field.dart';
 
 class PasswordField extends StatefulWidget {
   final TextEditingController controller;
   final String? Function(String?)? validator;
-  const PasswordField({super.key, required this.controller, this.validator});
+  const PasswordField(
+      {super.key, required this.controller, required this.validator});
 
   @override
   State<PasswordField> createState() => _PasswordFieldState();
@@ -19,7 +19,7 @@ class _PasswordFieldState extends State<PasswordField> {
   Widget build(BuildContext context) {
     return AppTextFormField(
       controller: widget.controller,
-      validator: widget.validator ?? PasswordValidator.signUpValidater,
+      validator: widget.validator,
       hintText: '********',
       hintStyle: AppTextStyles.balanceLabel.copyWith(
         color: AppColors.textSecondary,

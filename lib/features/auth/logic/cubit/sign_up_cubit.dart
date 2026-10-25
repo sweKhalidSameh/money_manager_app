@@ -12,13 +12,13 @@ class SignUpCubit extends Cubit<SignUpState> {
 
   SignUpCubit({required this.authRepository}) : super(SignUpInitial());
 
-  Future<void> signUp(
-      {required String firstName,
-      required String lastName,
-      required String email,
-      required String phone,
-      required String password,
-      required String confirmPassword}) async {
+  Future<void> signUp({
+    required String firstName,
+    required String lastName,
+    required String email,
+    required String phone,
+    required String password,
+  }) async {
     emit(SignUpLoading());
 
     try {

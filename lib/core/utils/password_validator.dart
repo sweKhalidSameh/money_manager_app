@@ -17,7 +17,7 @@ class PasswordValidator {
     return PasswordStrength.strong;
   }
 
-  static String? signUpValidater(String? value) {
+  static String? signUpValidator(String? value) {
     if (value == null || value.isEmpty) {
       return 'Password is required.';
     } else if (value.length < 8) {
