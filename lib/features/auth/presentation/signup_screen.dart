@@ -46,11 +46,23 @@ class _SignupScreenState extends State<SignupScreen> {
       create: (_) =>
           SignUpCubit(authRepository: context.read<AuthRepository>()),
       child: BlocConsumer<SignUpCubit, SignUpState>(listener: (context, state) {
-        if (state is SignUpFailure) {
+        if (state is SignUpLoading) {
+          Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(
+              builder: (context) => const Scaffold(
+                body: Center(
+                  child: Text(
+                      'HOME PAGE'), //TODO: Replace with your home page widget
+                ),
+              ),
+            ),
+          );
+        } else if (state is SignUpFailure) {
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
               content: Text(state.errorMessage),
-              backgroundColor: AppColors.error,
+              backgroundColor: Colors.red,
             ),
           );
         }
@@ -208,7 +220,7 @@ class _SignupScreenState extends State<SignupScreen> {
                       const SizedBox(height: 20),
 
                       // Google Sign Up
-                      _buildGoogleButton(),
+                      _buildGoogleButton(context),
 
                       const SizedBox(height: 20),
 
@@ -317,7 +329,7 @@ class _SignupScreenState extends State<SignupScreen> {
   }
 
   // -------------------------
-  Widget _buildGoogleButton() {
+  Widget _buildGoogleButton(BuildContext context) {
     return SizedBox(
       width: double.infinity,
       child: ElevatedButton(

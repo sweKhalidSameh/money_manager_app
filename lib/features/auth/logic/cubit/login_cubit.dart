@@ -1,4 +1,5 @@
 import 'package:bloc/bloc.dart';
+import 'package:flutter/material.dart';
 import 'package:meta/meta.dart';
 import 'package:money_manager/core/helper/map_error.dart';
 import 'package:money_manager/features/auth/logic/data/auth_repository.dart';
@@ -39,9 +40,11 @@ class LoginCubit extends Cubit<LoginState> {
         emit(LoginInitial());
       }
     } on FirebaseAuthException catch (e) {
+      debugPrint('Google FirebaseAuthException: ${e.code} | ${e.message}');
       if (isClosed) return;
       emit(LoginFailure(errorMessage: mapError(e.code)));
-    } catch (_) {
+    } catch (e) {
+      debugPrint('Google error: ${e.runtimeType} | $e');
       if (isClosed) return;
       emit(LoginFailure(
           errorMessage: 'Something went wrong. Please try again.'));
