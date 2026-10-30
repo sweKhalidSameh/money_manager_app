@@ -11,6 +11,7 @@ import 'package:money_manager/features/auth/logic/cubit/sign_up_cubit.dart';
 import 'package:money_manager/features/auth/logic/data/auth_repository.dart';
 import 'package:money_manager/features/auth/widgets/password_field.dart';
 import 'package:money_manager/features/auth/widgets/password_strength_bar.dart';
+import 'package:money_manager/features/home/presentation/home_screen.dart';
 
 class SignupScreen extends StatefulWidget {
   const SignupScreen({super.key});
@@ -46,18 +47,9 @@ class _SignupScreenState extends State<SignupScreen> {
       create: (_) =>
           SignUpCubit(authRepository: context.read<AuthRepository>()),
       child: BlocConsumer<SignUpCubit, SignUpState>(listener: (context, state) {
-        if (state is SignUpLoading) {
-          Navigator.pushReplacement(
-            context,
-            MaterialPageRoute(
-              builder: (context) => const Scaffold(
-                body: Center(
-                  child: Text(
-                      'HOME PAGE'), //TODO: Replace with your home page widget
-                ),
-              ),
-            ),
-          );
+        if (state is SignUpSuccess) {
+          Navigator.push(
+              context, MaterialPageRoute(builder: (context) => HomeScreen()));
         } else if (state is SignUpFailure) {
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(

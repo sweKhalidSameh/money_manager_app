@@ -10,6 +10,7 @@ import 'package:money_manager/features/auth/logic/cubit/login_cubit.dart';
 import 'package:money_manager/features/auth/logic/data/auth_repository.dart';
 import 'package:money_manager/features/auth/presentation/signup_screen.dart';
 import 'package:money_manager/features/auth/widgets/password_field.dart';
+import 'package:money_manager/features/home/presentation/home_screen.dart';
 
 class LoginScreen extends StatefulWidget {
   LoginScreen({super.key});
@@ -38,17 +39,8 @@ class _LoginScreenState extends State<LoginScreen> {
         child: BlocListener<LoginCubit, LoginState>(
           listener: (context, state) {
             if (state is LoginSuccess) {
-              Navigator.pushReplacement(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => const Scaffold(
-                    body: Center(
-                      child: Text(
-                          'HOME PAGE'), //TODO: Replace with your home page widget
-                    ),
-                  ),
-                ),
-              );
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => HomeScreen()));
             } else if (state is LoginFailure) {
               ScaffoldMessenger.of(context).showSnackBar(
                 SnackBar(
@@ -67,221 +59,213 @@ class _LoginScreenState extends State<LoginScreen> {
                   children: [
                     SafeArea(
                       child: SingleChildScrollView(
-                        child: SingleChildScrollView(
-                          padding: const EdgeInsets.all(16.0),
-                          child: Column(
-                            children: [
-                              SizedBox(height: 100),
-                              _buildTopInformation(),
-                              Form(
-                                key: _formKey,
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    // const SizedBox(height: 10),
-                                    Padding(
-                                      padding: const EdgeInsets.all(8.0),
-                                      child: Text(
-                                        'Email',
-                                        style: AppTextStyles.cardSubtitle,
-                                      ),
-                                    ),
-                                    AppTextFormField(
-                                      validator: EmailValidator.validate,
-                                      controller: _emailController,
-                                      hintText: 'example@gmail.com',
-                                      hintStyle: AppTextStyles.balanceLabel
-                                          .copyWith(
-                                              color: AppColors.textSecondary),
-                                      contentPadding:
-                                          EdgeInsetsDirectional.symmetric(
-                                        horizontal: 12,
-                                        vertical: 16,
-                                      ),
-                                      inputTextStyle: AppTextStyles.bodyText,
-                                      suffixIcon: Icon(
-                                        Icons.email,
-                                        color: AppColors.primaryColor,
-                                      ),
-                                    ),
-                                    SizedBox(height: 8),
-                                    Padding(
-                                      padding: const EdgeInsets.all(8.0),
-                                      child: Text(
-                                        'Password',
-                                        style: AppTextStyles.cardSubtitle,
-                                      ),
-                                    ),
-                                    // password field
-                                    PasswordField(
-                                      validator:
-                                          PasswordValidator.loginValidator,
-                                      controller: _passwordController,
-                                    ),
-                                    const SizedBox(height: 10),
-                                    Row(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.end,
-                                      mainAxisAlignment: MainAxisAlignment.end,
-                                      children: [
-                                        TextButton(
-                                          onPressed: () {
-                                            // Handle forgot password logic here
-                                          },
-                                          child: Text(
-                                            'Forgot Password?',
-                                            style:
-                                                AppTextStyles.bodyText.copyWith(
-                                              color: AppColors.secondaryColor,
-                                            ),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                    SizedBox(height: 10),
-                                    ElevatedButton(
-                                      onPressed: isLoading
-                                          ? null
-                                          : () {
-                                              if (_formKey.currentState!
-                                                  .validate()) {
-                                                context
-                                                    .read<LoginCubit>()
-                                                    .login(
-                                                      email:
-                                                          _emailController.text,
-                                                      password:
-                                                          _passwordController
-                                                              .text,
-                                                    );
-                                              }
-                                            },
-                                      style: ElevatedButton.styleFrom(
-                                        backgroundColor:
-                                            AppColors.secondaryColor,
-                                        padding: const EdgeInsets.symmetric(
-                                          vertical: 12,
-                                          horizontal: 16,
-                                        ),
-                                        shape: RoundedRectangleBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(16.0),
-                                        ),
-                                      ),
-                                      child: isLoading
-                                          ? Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.center,
-                                              children: [
-                                                  CircularProgressIndicator(
-                                                    color: Colors.black,
-                                                  )
-                                                ])
-                                          : Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.center,
-                                              children: [
-                                                Icon(Icons.login,
-                                                    color: Colors.black),
-                                                SizedBox(width: 8),
-                                                Text(
-                                                  'Login',
-                                                  style: AppTextStyles.bodyText
-                                                      .copyWith(
-                                                    color: Colors.black,
-                                                  ),
-                                                ),
-                                              ],
-                                            ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                              SizedBox(height: 10),
-                              Row(
+                        padding: const EdgeInsets.all(16.0),
+                        child: Column(
+                          children: [
+                            SizedBox(height: 100),
+                            _buildTopInformation(),
+                            Form(
+                              key: _formKey,
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Expanded(
-                                    child: Divider(
-                                      color: Colors.grey,
-                                      thickness: 1,
-                                    ),
-                                  ),
+                                  // const SizedBox(height: 10),
                                   Padding(
-                                    padding:
-                                        EdgeInsets.symmetric(horizontal: 12),
+                                    padding: const EdgeInsets.all(8.0),
                                     child: Text(
-                                      'OR',
+                                      'Email',
                                       style: AppTextStyles.cardSubtitle,
                                     ),
                                   ),
-                                  Expanded(
-                                    child: Divider(
-                                      color: Colors.grey,
-                                      thickness: 1,
+                                  AppTextFormField(
+                                    validator: EmailValidator.validate,
+                                    controller: _emailController,
+                                    hintText: 'example@gmail.com',
+                                    hintStyle: AppTextStyles.balanceLabel
+                                        .copyWith(
+                                            color: AppColors.textSecondary),
+                                    contentPadding:
+                                        EdgeInsetsDirectional.symmetric(
+                                      horizontal: 12,
+                                      vertical: 16,
+                                    ),
+                                    inputTextStyle: AppTextStyles.bodyText,
+                                    suffixIcon: Icon(
+                                      Icons.email,
+                                      color: AppColors.primaryColor,
                                     ),
                                   ),
-                                ],
-                              ),
-                              SizedBox(height: 10),
-                              ElevatedButton(
-                                onPressed: () {
-                                  context.read<LoginCubit>().loginWithGoogle();
-                                },
-                                style: ElevatedButton.styleFrom(
-                                  backgroundColor: AppColors.cardBackground,
-                                  padding: const EdgeInsets.symmetric(
-                                    vertical: 12,
-                                    horizontal: 16,
-                                  ),
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(16.0),
-                                  ),
-                                ),
-                                child: Row(
-                                  mainAxisSize: MainAxisSize.max,
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    SvgPicture.asset(
-                                        'assets/svgs/google_icon.svg'),
-                                    SizedBox(width: 8),
-                                    Text(
-                                      'Sign in with Google',
-                                      style: AppTextStyles.bodyText,
-                                    ),
-                                  ],
-                                ),
-                              ),
-                              SizedBox(height: 20),
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Text(
-                                    "Don't have an account? ",
-                                    style: AppTextStyles.bodyText,
-                                  ),
-                                  TextButton(
-                                    onPressed: () {
-                                      Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                          builder: (context) => SignupScreen(),
-                                        ),
-                                      );
-                                    },
-                                    style: TextButton.styleFrom(
-                                      padding: EdgeInsets.zero,
-                                    ),
+                                  SizedBox(height: 8),
+                                  Padding(
+                                    padding: const EdgeInsets.all(8.0),
                                     child: Text(
-                                      'Sign Up',
-                                      style: AppTextStyles.bodyText.copyWith(
-                                        color: AppColors.secondaryColor,
+                                      'Password',
+                                      style: AppTextStyles.cardSubtitle,
+                                    ),
+                                  ),
+                                  // password field
+                                  PasswordField(
+                                    validator: PasswordValidator.loginValidator,
+                                    controller: _passwordController,
+                                  ),
+                                  const SizedBox(height: 10),
+                                  Row(
+                                    crossAxisAlignment: CrossAxisAlignment.end,
+                                    mainAxisAlignment: MainAxisAlignment.end,
+                                    children: [
+                                      TextButton(
+                                        onPressed: () {
+                                          // Handle forgot password logic here
+                                        },
+                                        child: Text(
+                                          'Forgot Password?',
+                                          style:
+                                              AppTextStyles.bodyText.copyWith(
+                                            color: AppColors.secondaryColor,
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  SizedBox(height: 10),
+                                  ElevatedButton(
+                                    onPressed: isLoading
+                                        ? null
+                                        : () {
+                                            if (_formKey.currentState!
+                                                .validate()) {
+                                              context.read<LoginCubit>().login(
+                                                    email:
+                                                        _emailController.text,
+                                                    password:
+                                                        _passwordController
+                                                            .text,
+                                                  );
+                                            }
+                                          },
+                                    style: ElevatedButton.styleFrom(
+                                      backgroundColor: AppColors.secondaryColor,
+                                      padding: const EdgeInsets.symmetric(
+                                        vertical: 12,
+                                        horizontal: 16,
+                                      ),
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius:
+                                            BorderRadius.circular(16.0),
                                       ),
                                     ),
+                                    child: isLoading
+                                        ? Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
+                                            children: [
+                                                CircularProgressIndicator(
+                                                  color: Colors.black,
+                                                )
+                                              ])
+                                        : Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
+                                            children: [
+                                              Icon(Icons.login,
+                                                  color: Colors.black),
+                                              SizedBox(width: 8),
+                                              Text(
+                                                'Login',
+                                                style: AppTextStyles.bodyText
+                                                    .copyWith(
+                                                  color: Colors.black,
+                                                ),
+                                              ),
+                                            ],
+                                          ),
                                   ),
                                 ],
                               ),
-                            ],
-                          ),
+                            ),
+                            SizedBox(height: 10),
+                            Row(
+                              children: [
+                                Expanded(
+                                  child: Divider(
+                                    color: Colors.grey,
+                                    thickness: 1,
+                                  ),
+                                ),
+                                Padding(
+                                  padding: EdgeInsets.symmetric(horizontal: 12),
+                                  child: Text(
+                                    'OR',
+                                    style: AppTextStyles.cardSubtitle,
+                                  ),
+                                ),
+                                Expanded(
+                                  child: Divider(
+                                    color: Colors.grey,
+                                    thickness: 1,
+                                  ),
+                                ),
+                              ],
+                            ),
+                            SizedBox(height: 10),
+                            ElevatedButton(
+                              onPressed: () {
+                                context.read<LoginCubit>().loginWithGoogle();
+                              },
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor: AppColors.cardBackground,
+                                padding: const EdgeInsets.symmetric(
+                                  vertical: 12,
+                                  horizontal: 16,
+                                ),
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(16.0),
+                                ),
+                              ),
+                              child: Row(
+                                mainAxisSize: MainAxisSize.max,
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  SvgPicture.asset(
+                                      'assets/svgs/google_icon.svg'),
+                                  SizedBox(width: 8),
+                                  Text(
+                                    'Sign in with Google',
+                                    style: AppTextStyles.bodyText,
+                                  ),
+                                ],
+                              ),
+                            ),
+                            SizedBox(height: 20),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Text(
+                                  "Don't have an account? ",
+                                  style: AppTextStyles.bodyText,
+                                ),
+                                TextButton(
+                                  onPressed: () {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) => SignupScreen(),
+                                      ),
+                                    );
+                                  },
+                                  style: TextButton.styleFrom(
+                                    padding: EdgeInsets.zero,
+                                  ),
+                                  child: Text(
+                                    'Sign Up',
+                                    style: AppTextStyles.bodyText.copyWith(
+                                      color: AppColors.secondaryColor,
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ],
                         ),
                       ),
                     ),

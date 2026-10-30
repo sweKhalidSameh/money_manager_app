@@ -35,7 +35,7 @@ class MyApp extends StatelessWidget {
             ThemeData.dark().textTheme,
           ),
         ),
-        home: LoginScreen(), // Replace with your initial screen
+        home: LoginScreen(),
       ),
     );
   }
