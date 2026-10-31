@@ -1,3 +1,5 @@
+import 'package:money_manager/l10n/app_localizations.dart';
+
 enum PasswordStrength { veryWeak, weak, fair, good, strong }
 
 class PasswordValidator {
@@ -17,26 +19,26 @@ class PasswordValidator {
     return PasswordStrength.strong;
   }
 
-  static String? signUpValidator(String? value) {
+  static String? signUpValidator(String? value, AppLocalizations l10n) {
     if (value == null || value.isEmpty) {
-      return 'Password is required.';
+      return l10n.validatePasswordRequired;
     } else if (value.length < 8) {
-      return 'Password must be at least 8 characters long.';
+      return l10n.validatePasswordMin;
     } else if (!RegExp(r'[A-Z]').hasMatch(value)) {
-      return 'Password must contain at least one uppercase letter.';
+      return l10n.validatePasswordUpper;
     } else if (!RegExp(r'[a-z]').hasMatch(value)) {
-      return 'Password must contain at least one lowercase letter.';
+      return l10n.validatePasswordLower;
     } else if (!RegExp(r'[0-9]').hasMatch(value)) {
-      return 'Password must contain at least one digit.';
+      return l10n.validatePasswordDigit;
     } else if (!RegExp(r'[!@#$%^&*(),.?":{}|<>]').hasMatch(value)) {
-      return 'Password must contain at least one special character.';
+      return l10n.validatePasswordSpecial;
     }
     return null;
   }
 
-  static String? loginValidator(String? value) {
+  static String? loginValidator(String? value, AppLocalizations l10n) {
     if (value == null || value.isEmpty) {
-      return 'Password is required.';
+      return l10n.validatePasswordRequired;
     }
     return null;
   }
