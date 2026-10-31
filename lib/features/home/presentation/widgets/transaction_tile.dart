@@ -6,7 +6,8 @@ import 'package:money_manager/core/utils/currency_formatter.dart';
 import 'package:money_manager/core/widgets/icon_badge.dart';
 
 /// One row in the recent transactions list.
-/// A positive [amount] is income (green), a negative one is an expense.
+/// [amount] is always a positive value. [isIncome] decides the sign
+/// ('+' in green for income, '-' for expenses and investments).
 class TransactionTile extends StatelessWidget {
   const TransactionTile({
     super.key,
@@ -16,6 +17,7 @@ class TransactionTile extends StatelessWidget {
     required this.title,
     required this.subtitle,
     required this.amount,
+    required this.isIncome,
     required this.categoryLabel,
     required this.categoryColor,
     this.onTap,
@@ -27,14 +29,13 @@ class TransactionTile extends StatelessWidget {
   final String title;
   final String subtitle;
   final double amount;
+  final bool isIncome;
   final String categoryLabel;
   final Color categoryColor;
   final VoidCallback? onTap;
 
   @override
   Widget build(BuildContext context) {
-    final isIncome = amount > 0;
-
     return Material(
       color: AppColors.cardBackground,
       clipBehavior: Clip.antiAlias,
@@ -87,7 +88,7 @@ class TransactionTile extends StatelessWidget {
                     mainAxisSize: MainAxisSize.min,
                     children: [
                       Text(
-                        formatAmount(amount, showSign: true),
+                        '${isIncome ? '+' : '-'}${formatAmount(amount.abs())}',
                         textDirection: TextDirection.ltr,
                         style: AppTextStyles.numberMedium.copyWith(
                           color: isIncome
