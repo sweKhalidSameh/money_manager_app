@@ -12,6 +12,7 @@ import 'package:money_manager/features/auth/logic/data/auth_repository.dart';
 import 'package:money_manager/features/auth/widgets/password_field.dart';
 import 'package:money_manager/features/auth/widgets/password_strength_bar.dart';
 import 'package:money_manager/features/home/presentation/home_screen.dart';
+import 'package:money_manager/l10n/l10n_extension.dart';
 
 class SignupScreen extends StatefulWidget {
   const SignupScreen({super.key});
@@ -70,7 +71,7 @@ class _SignupScreenState extends State<SignupScreen> {
                     children: [
                       const SizedBox(height: 70),
                       // Header
-                      _buildTopInformation(),
+                      _buildTopInformation(context),
                       const SizedBox(height: 10),
                       Form(
                         key: _formKey,
@@ -85,12 +86,12 @@ class _SignupScreenState extends State<SignupScreen> {
                                   child: _buildNameField(
                                     validator: (value) {
                                       if (value == null || value.isEmpty) {
-                                        return 'Please enter your first name';
+                                        return context.l10n.validateFirstName;
                                       }
                                       return null;
                                     },
-                                    label: 'First Name',
-                                    hint: 'First Name',
+                                    label: context.l10n.fieldFirstName,
+                                    hint: context.l10n.fieldFirstName,
                                     controller: _firstNameController,
                                   ),
                                 ),
@@ -99,12 +100,12 @@ class _SignupScreenState extends State<SignupScreen> {
                                   child: _buildNameField(
                                     validator: (value) {
                                       if (value == null || value.isEmpty) {
-                                        return 'Please enter your last name';
+                                        return context.l10n.validateLastName;
                                       }
                                       return null;
                                     },
-                                    label: 'Last Name',
-                                    hint: 'Last Name',
+                                    label: context.l10n.fieldLastName,
+                                    hint: context.l10n.fieldLastName,
                                     controller: _lastNameController,
                                   ),
                                 ),
@@ -114,10 +115,11 @@ class _SignupScreenState extends State<SignupScreen> {
                             const SizedBox(height: 8),
 
                             // Email
-                            _buildLabel('Email'),
+                            _buildLabel(context.l10n.fieldEmail),
 
                             AppTextFormField(
-                              validator: EmailValidator.validate,
+                              validator: (value) =>
+                                  EmailValidator.validate(value, context.l10n),
                               controller: _emailController,
                               hintText: 'example@gmail.com',
                               hintStyle: AppTextStyles.balanceLabel.copyWith(
@@ -135,16 +137,16 @@ class _SignupScreenState extends State<SignupScreen> {
                             ),
 
                             const SizedBox(height: 8),
-                            _buildLabel('Phone'),
+                            _buildLabel(context.l10n.fieldPhone),
 
                             AppTextFormField(
                               controller: _phoneController,
                               validator: (value) {
                                 if (value == null || value.isEmpty) {
-                                  return 'Please enter your phone number';
+                                  return context.l10n.validatePhoneRequired;
                                 } else if (!RegExp(r'^01[0125]\d{8}$')
                                     .hasMatch(value)) {
-                                  return 'Please enter a valid Egyptian phone number starting with 010, 011, 012, or 015';
+                                  return context.l10n.validatePhoneInvalid;
                                 }
                                 return null;
                               },
@@ -165,21 +167,23 @@ class _SignupScreenState extends State<SignupScreen> {
 
                             const SizedBox(height: 8),
 
-                            _buildLabel('Password'),
+                            _buildLabel(context.l10n.fieldPassword),
 
                             PasswordField(
-                              validator: PasswordValidator.signUpValidator,
+                              validator: (value) =>
+                                  PasswordValidator.signUpValidator(
+                                      value, context.l10n),
                               controller: _passwordController,
                             ),
                             const SizedBox(height: 8),
-                            _buildLabel('Confirm Password'),
+                            _buildLabel(context.l10n.fieldConfirmPassword),
 
                             PasswordField(
                               validator: (value) {
                                 if (value == null || value.isEmpty) {
-                                  return 'Please confirm your password';
+                                  return context.l10n.validateConfirmPassword;
                                 } else if (value != _passwordController.text) {
-                                  return 'Passwords do not match';
+                                  return context.l10n.validatePasswordsMismatch;
                                 }
                                 return null;
                               },
@@ -191,7 +195,7 @@ class _SignupScreenState extends State<SignupScreen> {
 
                             const SizedBox(height: 8),
                             Text(
-                              'At least 8 characters \nWith an uppercase letter \nA lowercase letter\nA number\nAnd a special character.',
+                              context.l10n.authPasswordRules,
                               style: AppTextStyles.captionText.copyWith(
                                 color: AppColors.textSecondary,
                               ),
@@ -207,7 +211,7 @@ class _SignupScreenState extends State<SignupScreen> {
                       const SizedBox(height: 20),
 
                       // OR
-                      _buildOrDivider(),
+                      _buildOrDivider(context),
 
                       const SizedBox(height: 20),
 
@@ -262,7 +266,7 @@ class _SignupScreenState extends State<SignupScreen> {
   // -------------------------
   Widget _buildLabel(String text) {
     return Padding(
-      padding: const EdgeInsets.only(left: 8, bottom: 8),
+      padding: const EdgeInsetsDirectional.only(start: 8, bottom: 8),
       child: Text(text, style: AppTextStyles.cardSubtitle),
     );
   }
@@ -297,7 +301,7 @@ class _SignupScreenState extends State<SignupScreen> {
             const Icon(Icons.person_add, color: Colors.black),
             const SizedBox(width: 8),
             Text(
-              'Create Account',
+              context.l10n.authCreateAccount,
               style: AppTextStyles.bodyText.copyWith(color: Colors.black),
             ),
           ],
@@ -307,13 +311,13 @@ class _SignupScreenState extends State<SignupScreen> {
   }
 
   // -------------------------
-  Widget _buildOrDivider() {
+  Widget _buildOrDivider(BuildContext context) {
     return Row(
       children: [
         const Expanded(child: Divider(color: Colors.grey, thickness: 1)),
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 12),
-          child: Text('OR', style: AppTextStyles.cardSubtitle),
+          child: Text(context.l10n.authOr, style: AppTextStyles.cardSubtitle),
         ),
         const Expanded(child: Divider(color: Colors.grey, thickness: 1)),
       ],
@@ -340,7 +344,7 @@ class _SignupScreenState extends State<SignupScreen> {
           children: [
             SvgPicture.asset('assets/svgs/google_icon.svg'),
             const SizedBox(width: 8),
-            Text('Sign up with Google', style: AppTextStyles.bodyText),
+            Text(context.l10n.authSignUpWithGoogle, style: AppTextStyles.bodyText),
           ],
         ),
       ),
@@ -352,14 +356,14 @@ class _SignupScreenState extends State<SignupScreen> {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Text('Already have an account? ', style: AppTextStyles.bodyText),
+        Text(context.l10n.authHaveAccount, style: AppTextStyles.bodyText),
         TextButton(
           onPressed: () {
             Navigator.pop(context);
           },
           style: TextButton.styleFrom(padding: EdgeInsets.zero),
           child: Text(
-            'Login',
+            context.l10n.authLogin,
             style: AppTextStyles.bodyText.copyWith(
               color: AppColors.secondaryColor,
             ),
@@ -374,7 +378,7 @@ class _SignupScreenState extends State<SignupScreen> {
 // Header
 // -------------------------
 
-Widget _buildTopInformation() {
+Widget _buildTopInformation(BuildContext context) {
   return Column(
     crossAxisAlignment: CrossAxisAlignment.center,
     children: [
@@ -387,12 +391,12 @@ Widget _buildTopInformation() {
         child: Image.asset('assets/images/Logo.png'),
       ),
       const SizedBox(height: 8),
-      Text('Money Manager', style: AppTextStyles.cardTitle),
+      Text(context.l10n.appName, style: context.titleStyle.copyWith(fontSize: 18)),
       const SizedBox(height: 3),
       Text(
-        'Create your account and start managing your money.',
+        context.l10n.authSignupSubtitle,
         textAlign: TextAlign.center,
-        style: AppTextStyles.cardSubtitle,
+        style: context.captionStyle.copyWith(fontSize: 14),
       ),
       const SizedBox(height: 20),
     ],

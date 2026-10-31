@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:money_manager/core/theme/app_colors.dart';
 import 'package:money_manager/core/utils/password_validator.dart';
+import 'package:money_manager/l10n/l10n_extension.dart';
 
 class PasswordStrengthBar extends StatelessWidget {
   final TextEditingController controller;
@@ -21,23 +22,23 @@ class PasswordStrengthBar extends StatelessWidget {
         switch (strength) {
           case PasswordStrength.veryWeak:
             color = AppColors.error;
-            text = 'Very Weak';
+            text = context.l10n.strengthVeryWeak;
             break;
           case PasswordStrength.weak:
             color = AppColors.error;
-            text = 'Weak';
+            text = context.l10n.strengthWeak;
             break;
           case PasswordStrength.fair:
             color = AppColors.warning;
-            text = 'Fair';
+            text = context.l10n.strengthFair;
             break;
           case PasswordStrength.good:
             color = AppColors.warning;
-            text = 'Good';
+            text = context.l10n.strengthGood;
             break;
           case PasswordStrength.strong:
             color = AppColors.success;
-            text = 'Strong';
+            text = context.l10n.strengthStrong;
             break;
         }
 
@@ -53,7 +54,7 @@ class PasswordStrengthBar extends StatelessWidget {
             ),
             SizedBox(height: 4),
             Text(
-              'Password Strength: $text',
+              context.l10n.passwordStrengthLabel(text),
               style: TextStyle(color: color),
             ),
           ],

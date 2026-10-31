@@ -1,0 +1,156 @@
+{
+  "@@locale": "en",
+  "appName": "Money Manager",
+  "currency": "SAR",
+  "switchLanguageLabel": "العربية",
+  "@switchLanguageLabel": {
+    "description": "Label of the language toggle. It shows the name of the OTHER language, written in that language."
+  },
+  "homeGreeting": "Hello, {name} 👋",
+  "@homeGreeting": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "homeSubtitle": "A full overview of your wealth today",
+  "balanceTotalNet": "Total net balance",
+  "actionAddTransaction": "Add transaction",
+  "actionTransfer": "Transfer",
+  "actionBudget": "Budget",
+  "balanceComparison": "Compared with last {month} ({change})",
+  "@balanceComparison": {
+    "placeholders": {
+      "month": {
+        "type": "String"
+      },
+      "change": {
+        "type": "String"
+      }
+    }
+  },
+  "budgetAlertTitle": "Budget alert",
+  "budgetAlertMessage": "You are close to using up your “{category}” budget for {month}. Only {remaining} left.",
+  "@budgetAlertMessage": {
+    "placeholders": {
+      "category": {
+        "type": "String"
+      },
+      "month": {
+        "type": "String"
+      },
+      "remaining": {
+        "type": "String"
+      }
+    }
+  },
+  "budgetDetails": "Budget details",
+  "statExpenses": "Expenses",
+  "statIncome": "Income",
+  "statInvestments": "Investments",
+  "statSavings": "Savings",
+  "statSinceLastWeek": "vs last week",
+  "statStable": "Stable",
+  "incomeCollected": "{percent}% collected",
+  "@incomeCollected": {
+    "placeholders": {
+      "percent": {
+        "type": "int"
+      }
+    }
+  },
+  "investmentsReturn": "Return",
+  "activePortfolios": "{count, plural, =1{1 active portfolio} other{{count} active portfolios}}",
+  "@activePortfolios": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "savingsRemaining": "{amount} left",
+  "@savingsRemaining": {
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      }
+    }
+  },
+  "recentTransactions": "Recent transactions",
+  "viewAll": "View all",
+  "filterAll": "All",
+  "filterExpenses": "Expenses",
+  "filterIncome": "Income",
+  "filterInvestments": "Investments",
+  "navHome": "Home",
+  "navBudget": "Budget",
+  "navAnalytics": "Analytics",
+  "navTransactions": "Transactions",
+  "navInvestments": "Investments",
+  "authWelcomeBack": "Welcome back! Please login to your account.",
+  "authSignupSubtitle": "Create your account and start managing your money.",
+  "fieldEmail": "Email",
+  "fieldPassword": "Password",
+  "fieldConfirmPassword": "Confirm Password",
+  "fieldFirstName": "First Name",
+  "fieldLastName": "Last Name",
+  "fieldPhone": "Phone",
+  "authForgotPassword": "Forgot Password?",
+  "authLogin": "Login",
+  "authOr": "OR",
+  "authSignInWithGoogle": "Sign in with Google",
+  "authSignUpWithGoogle": "Sign up with Google",
+  "authNoAccount": "Don’t have an account? ",
+  "authSignUp": "Sign Up",
+  "authHaveAccount": "Already have an account? ",
+  "authCreateAccount": "Create Account",
+  "authPasswordRules": "At least 8 characters\nWith an uppercase letter\nA lowercase letter\nA number\nAnd a special character.",
+  "passwordStrengthLabel": "Password Strength: {strength}",
+  "@passwordStrengthLabel": {
+    "placeholders": {
+      "strength": {
+        "type": "String"
+      }
+    }
+  },
+  "strengthVeryWeak": "Very Weak",
+  "strengthWeak": "Weak",
+  "strengthFair": "Fair",
+  "strengthGood": "Good",
+  "strengthStrong": "Strong",
+  "validateFirstName": "Please enter your first name",
+  "validateLastName": "Please enter your last name",
+  "validatePhoneRequired": "Please enter your phone number",
+  "validatePhoneInvalid": "Please enter a valid Egyptian phone number starting with 010, 011, 012, or 015",
+  "validateConfirmPassword": "Please confirm your password",
+  "validatePasswordsMismatch": "Passwords do not match",
+  "demoUserName": "Ahmed",
+  "@demoUserName": {
+    "description": "DEMO DATA. Delete when HomeCubit provides real data."
+  },
+  "demoPreviousMonth": "September",
+  "demoBudgetCategory": "Entertainment & dining",
+  "demoBudgetMonth": "October",
+  "demoGoalName": "Emergency goal",
+  "demoTx1Title": "Monthly base salary",
+  "demoTx1Subtitle": "Today, 09:30 AM • Al Rajhi Bank",
+  "demoTx1Category": "Quick transfer",
+  "demoTx2Title": "Tech stocks purchase",
+  "demoTx2Subtitle": "Yesterday, 02:15 PM • Trading portfolio",
+  "demoTx2Category": "Investment assets",
+  "demoTx3Title": "Al Sadhan Supermarket",
+  "demoTx3Subtitle": "Oct 24 • Mada Silver card",
+  "demoTx3Category": "Groceries",
+  "demoTx4Title": "Café Pro 99",
+  "demoTx4Subtitle": "Oct 23 • Apple Pay",
+  "demoTx4Category": "Restaurants & cafés",
+  "validateEmailRequired": "Email is required.",
+  "validateEmailInvalid": "Please enter a valid email address.",
+  "validatePasswordRequired": "Password is required.",
+  "validatePasswordMin": "Password must be at least 8 characters long.",
+  "validatePasswordUpper": "Password must contain at least one uppercase letter.",
+  "validatePasswordLower": "Password must contain at least one lowercase letter.",
+  "validatePasswordDigit": "Password must contain at least one digit.",
+  "validatePasswordSpecial": "Password must contain at least one special character."
+}

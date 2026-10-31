@@ -11,6 +11,7 @@ import 'package:money_manager/features/auth/logic/data/auth_repository.dart';
 import 'package:money_manager/features/auth/presentation/signup_screen.dart';
 import 'package:money_manager/features/auth/widgets/password_field.dart';
 import 'package:money_manager/features/home/presentation/home_screen.dart';
+import 'package:money_manager/l10n/l10n_extension.dart';
 
 class LoginScreen extends StatefulWidget {
   LoginScreen({super.key});
@@ -63,7 +64,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         child: Column(
                           children: [
                             SizedBox(height: 100),
-                            _buildTopInformation(),
+                            _buildTopInformation(context),
                             Form(
                               key: _formKey,
                               child: Column(
@@ -73,12 +74,13 @@ class _LoginScreenState extends State<LoginScreen> {
                                   Padding(
                                     padding: const EdgeInsets.all(8.0),
                                     child: Text(
-                                      'Email',
+                                      context.l10n.fieldEmail,
                                       style: AppTextStyles.cardSubtitle,
                                     ),
                                   ),
                                   AppTextFormField(
-                                    validator: EmailValidator.validate,
+                                    validator: (value) =>
+                                        EmailValidator.validate(value, context.l10n),
                                     controller: _emailController,
                                     hintText: 'example@gmail.com',
                                     hintStyle: AppTextStyles.balanceLabel
@@ -99,13 +101,15 @@ class _LoginScreenState extends State<LoginScreen> {
                                   Padding(
                                     padding: const EdgeInsets.all(8.0),
                                     child: Text(
-                                      'Password',
+                                      context.l10n.fieldPassword,
                                       style: AppTextStyles.cardSubtitle,
                                     ),
                                   ),
                                   // password field
                                   PasswordField(
-                                    validator: PasswordValidator.loginValidator,
+                                    validator: (value) =>
+                                        PasswordValidator.loginValidator(
+                                            value, context.l10n),
                                     controller: _passwordController,
                                   ),
                                   const SizedBox(height: 10),
@@ -118,7 +122,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                           // Handle forgot password logic here
                                         },
                                         child: Text(
-                                          'Forgot Password?',
+                                          context.l10n.authForgotPassword,
                                           style:
                                               AppTextStyles.bodyText.copyWith(
                                             color: AppColors.secondaryColor,
@@ -171,7 +175,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                                   color: Colors.black),
                                               SizedBox(width: 8),
                                               Text(
-                                                'Login',
+                                                context.l10n.authLogin,
                                                 style: AppTextStyles.bodyText
                                                     .copyWith(
                                                   color: Colors.black,
@@ -195,7 +199,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                 Padding(
                                   padding: EdgeInsets.symmetric(horizontal: 12),
                                   child: Text(
-                                    'OR',
+                                    context.l10n.authOr,
                                     style: AppTextStyles.cardSubtitle,
                                   ),
                                 ),
@@ -230,7 +234,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                       'assets/svgs/google_icon.svg'),
                                   SizedBox(width: 8),
                                   Text(
-                                    'Sign in with Google',
+                                    context.l10n.authSignInWithGoogle,
                                     style: AppTextStyles.bodyText,
                                   ),
                                 ],
@@ -241,7 +245,7 @@ class _LoginScreenState extends State<LoginScreen> {
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 Text(
-                                  "Don't have an account? ",
+                                  context.l10n.authNoAccount,
                                   style: AppTextStyles.bodyText,
                                 ),
                                 TextButton(
@@ -257,7 +261,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                     padding: EdgeInsets.zero,
                                   ),
                                   child: Text(
-                                    'Sign Up',
+                                    context.l10n.authSignUp,
                                     style: AppTextStyles.bodyText.copyWith(
                                       color: AppColors.secondaryColor,
                                     ),
@@ -278,7 +282,7 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 }
 
-Widget _buildTopInformation() {
+Widget _buildTopInformation(BuildContext context) {
   return Column(
     crossAxisAlignment: CrossAxisAlignment.center,
     children: [
@@ -291,11 +295,12 @@ Widget _buildTopInformation() {
         child: Image.asset('assets/images/Logo.png'),
       ),
       SizedBox(height: 8),
-      Text('Money Manager', style: AppTextStyles.cardTitle),
+      Text(context.l10n.appName, style: context.titleStyle.copyWith(fontSize: 18)),
       SizedBox(height: 3),
       Text(
-        "Welcome back! Please login to your account.",
-        style: AppTextStyles.cardSubtitle,
+        context.l10n.authWelcomeBack,
+        textAlign: TextAlign.center,
+        style: context.captionStyle.copyWith(fontSize: 14),
       ),
       SizedBox(height: 20),
     ],
